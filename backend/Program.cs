@@ -1,3 +1,6 @@
+using DotNetEnv;
+Env.Load(Path.Combine(Directory.GetCurrentDirectory(), "../.env"));
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,6 +35,18 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapGet("/config", (IConfiguration config) =>
+{
+    return new
+    {
+        Db = config.GetConnectionString("Default"),
+        JwtKey = config["Jwt:Key"],
+        JwtIssuer = config["Jwt:Issuer"],
+        Redis = config["Redis:Connection"]
+    };
+});
+
 
 app.Run();
 
