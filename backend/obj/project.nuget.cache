@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "3RHSBpHYFPE=",
+  "success": true,
+  "projectFilePath": "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj",
+  "expectedPackageFiles": [
+    "/Users/dinhtanloc/.nuget/packages/microsoft.aspnetcore.openapi/9.0.11/microsoft.aspnetcore.openapi.9.0.11.nupkg.sha512",
+    "/Users/dinhtanloc/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
