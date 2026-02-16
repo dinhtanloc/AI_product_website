@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "d9zWvfm5F70=",
+  "dgSpecHash": "CA3HCkkdCtM=",
   "success": true,
   "projectFilePath": "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj",
   "expectedPackageFiles": [
     "/Users/dinhtanloc/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/dinhtanloc/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
+    "/Users/dinhtanloc/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/dinhtanloc/.nuget/packages/dotnetenv/3.1.1/dotnetenv.3.1.1.nupkg.sha512",
     "/Users/dinhtanloc/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/dinhtanloc/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.0/microsoft.aspnetcore.authentication.jwtbearer.9.0.0.nupkg.sha512",
