@@ -27,7 +27,6 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 
-    // 🔥 JWT button trong Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -94,6 +93,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(jwtKey))
     };
+    // Add custom error message for JWT errors
+    options.Events = new JwtBearerEvents
+    {
+        OnChallenge = context =>
+        {
+            context.HandleResponse();
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
+            var result = System.Text.Json.JsonSerializer.Serialize(new { message = "Token không hợp lệ hoặc đã hết hạn" });
+            return context.Response.WriteAsync(result);
+        }
+    };
 });
 
 builder.Services.AddAuthorization();
@@ -149,8 +160,9 @@ app.MapPost("/login", async (AppDbContext db, JwtService jwt, AuthRequest req) =
 {
     var user = await db.Users.FirstOrDefaultAsync(x => x.Email == req.Email);
 
+
     if (user == null || !BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
-        return Results.Unauthorized();
+        return Results.Json(new { message = "Wrong password or email" }, statusCode: 401);
 
     return Results.Ok(jwt.GenerateToken(user));
 }).WithTags("Auth");

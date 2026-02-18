@@ -31,7 +31,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('jwt')
   if (!token && to.path !== '/login' && to.path !== '/register') {
     return '/login'
   }

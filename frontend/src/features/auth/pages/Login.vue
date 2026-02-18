@@ -15,7 +15,11 @@ const login = async () => {
   error.value = ''
   loading.value = true
   try {
-    await loginApi(email.value, password.value)
+    const token = await loginApi(email.value, password.value)
+    // Save token to localStorage (already done in loginApi, but keep for clarity)
+    localStorage.setItem('jwt', token)
+    // Optionally set token globally for fetch/axios if needed
+    // Redirect to main page
     router.push('/')
   } catch (e) {
     if (e instanceof Error && e.message === 'Login failed') {
