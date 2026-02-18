@@ -1,6 +1,19 @@
-<script setup>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { getSecureData } from '@/utils/api'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+const secureMessage = ref('')
+const secureError = ref('')
+
+onMounted(async () => {
+  try {
+    secureMessage.value = await getSecureData()
+  } catch (e: any) {
+    secureError.value = e?.message || 'Failed to fetch secure data.'
+  }
+})
 
 const logout = () => {
   localStorage.removeItem('token')
@@ -18,6 +31,18 @@ const logout = () => {
         <router-link to="/" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
           <span class="text-xl">💬</span> Chat
         </router-link>
+        <router-link to="/image-generation" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
+          <span class="text-xl">🖼️</span> Image Generation
+        </router-link>
+        <router-link to="/image-segmentation" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
+          <span class="text-xl">🔳</span> Image Segmentation
+        </router-link>
+        <router-link to="/speech-recognition" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
+          <span class="text-xl">🎤</span> Speech Recognition
+        </router-link>
+        <router-link to="/video-detection" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
+          <span class="text-xl">🎬</span> Video Detection
+        </router-link>
         <router-link to="/profile" class="flex items-center gap-2 px-4 py-2 rounded-lg text-blue-700 font-medium hover:bg-blue-50 transition">
           <span class="text-xl">👤</span> Profile
         </router-link>
@@ -29,6 +54,10 @@ const logout = () => {
     </aside>
 
     <main class="flex-1 flex flex-col items-center justify-center p-10">
+      <div class="mb-6">
+        <div v-if="secureMessage" class="text-green-700 font-semibold">{{ secureMessage }}</div>
+        <div v-if="secureError" class="text-red-600">{{ secureError }}</div>
+      </div>
       <router-view />
     </main>
   </div>

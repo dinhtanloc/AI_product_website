@@ -1,3 +1,33 @@
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import BaseInput from '@/components/BaseInput.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import { register as registerApi } from '@/utils/auth'
+
+const email = ref('')
+const password = ref('')
+const error = ref('')
+const loading = ref(false)
+const router = useRouter()
+
+const register = async () => {
+  error.value = ''
+  loading.value = true
+  try {
+    await registerApi(email.value, password.value)
+    router.push('/')
+  } catch (e) {
+    console.log('Error in register:', e)
+    error.value = (e as Error)?.message || 'Registration failed.'
+  
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-pink-200">
     <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 space-y-6 flex flex-col items-center">
@@ -5,9 +35,14 @@
       <h2 class="text-3xl font-extrabold text-purple-700 mb-2 tracking-wide">Create Account</h2>
       <p class="text-gray-500 text-sm mb-4">Sign up to get started</p>
 
-      <BaseInput placeholder="Email" />
-      <BaseInput type="password" placeholder="Password" />
-      <BaseButton>Register</BaseButton>
+      <BaseInput v-model="email" placeholder="Email" />
+      <BaseInput v-model="password" type="password" placeholder="Password" />
+      <BaseButton @click="register" :disabled="loading">
+        <span v-if="loading">Registering...</span>
+        <span v-else>Register</span>
+      </BaseButton>
+
+      <div v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
 
       <router-link to="/login" class="text-sm text-blue-600 text-center block hover:underline mt-2">
         Back to login
@@ -15,8 +50,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import BaseInput from '@/components/BaseInput.vue'
-import BaseButton from '@/components/BaseButton.vue'
-</script>

@@ -1,0 +1,12 @@
+project:
+	name: Assistant Management System
+	version: 1.0.0
+frontend:
+	api_url: http://localhost:5000
+backend:
+	db_provider: sqlserver
+	db_host: localhost
+	db_port: 1433
+	db_name: assistant_db
+	jwt_issuer: assistant.local
+	jwt_audience: assistant_users

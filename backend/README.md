@@ -14,3 +14,5 @@ dotnet ef migrations add <Migration file> #dotnet ef migrations add InitUserTabl
 dotnet ef database update
 
 ```
+docker exec -it sqlserver bash
+/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P dinhloc1004!

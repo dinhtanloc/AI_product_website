@@ -3,14 +3,29 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { login as loginApi } from '@/utils/auth'
 
 const email = ref('')
 const password = ref('')
+const error = ref('')
+const loading = ref(false)
 const router = useRouter()
 
-const login = () => {
-  localStorage.setItem('token', 'demo')
-  router.push('/')
+const login = async () => {
+  error.value = ''
+  loading.value = true
+  try {
+    await loginApi(email.value, password.value)
+    router.push('/')
+  } catch (e) {
+    if (e instanceof Error && e.message === 'Login failed') {
+      error.value = 'Unauthorized: Your account is not allowed to login.'
+    } else {
+      error.value = (e as Error)?.message || 'Login failed.'
+    }
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -24,7 +39,13 @@ const login = () => {
       <BaseInput v-model="email" placeholder="Email" />
       <BaseInput v-model="password" type="password" placeholder="Password" />
 
-      <BaseButton @click="login">Login</BaseButton>
+
+      <BaseButton @click="login" :disabled="loading">
+        <span v-if="loading">Logging in...</span>
+        <span v-else>Login</span>
+      </BaseButton>
+
+      <div v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
 
       <router-link to="/register" class="text-blue-600 text-sm text-center block hover:underline mt-2">
         Create account

@@ -12,8 +12,8 @@ const send = () => {
 </script>
 
 <template>
-  <div class="flex flex-col h-full max-w-2xl w-full mx-auto">
-    <div class="flex-1 bg-white p-6 rounded-2xl shadow-lg overflow-y-auto space-y-4 mb-4">
+  <div class="flex flex-col h-full w-full">
+    <div class="flex-1 bg-white p-6 rounded-2xl shadow-lg overflow-y-auto space-y-4 mb-4 w-full">
       <div
         v-for="(m,i) in messages"
         :key="i"
@@ -27,7 +27,7 @@ const send = () => {
       <div v-if="messages.length === 0" class="text-gray-400 text-center py-10">No messages yet. Start the conversation!</div>
     </div>
 
-    <div class="flex gap-2 mt-auto bg-white p-3 rounded-xl shadow-md">
+    <div class="flex gap-2 mt-auto bg-white p-3 rounded-xl shadow-md w-full">
       <input
         v-model="input"
         class="flex-1 border border-gray-300 rounded-xl px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj": {}
+    "/Users/dinhtanloc/Projects/assistant_management_system/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj": {
+    "/Users/dinhtanloc/Projects/assistant_management_system/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj",
+        "projectUniqueName": "/Users/dinhtanloc/Projects/assistant_management_system/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/dinhtanloc/Projects/Ecommerce-website/backend/backend.csproj",
+        "projectPath": "/Users/dinhtanloc/Projects/assistant_management_system/backend/backend.csproj",
         "packagesPath": "/Users/dinhtanloc/.nuget/packages/",
-        "outputPath": "/Users/dinhtanloc/Projects/Ecommerce-website/backend/obj/",
+        "outputPath": "/Users/dinhtanloc/Projects/assistant_management_system/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/dinhtanloc/.nuget/NuGet/NuGet.Config"
@@ -69,6 +69,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "YamlDotNet": {
+              "target": "Package",
+              "version": "[16.3.0, )"
             }
           },
           "imports": [
