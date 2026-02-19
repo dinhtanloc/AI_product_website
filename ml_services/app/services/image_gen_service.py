@@ -5,7 +5,7 @@ from PIL import Image
 import base64
 
 class ImageGenService:
-    def __init__(self, model_name: str = "stabilityai/stable-diffusion-2-1"):
+    def __init__(self, model_name: str = "stabilityai/stable-diffusion-xl-base-1.0"):
         self.model = ImageGenerationModel(model_name)
 
     def generate_image(self, req: ImageGenRequest) -> str:

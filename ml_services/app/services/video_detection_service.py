@@ -1,3 +1,4 @@
+
 from app.models.video_detection import VideoDetectionModel
 from app.models.image_detection import ImageDetectionModel
 from PIL import Image

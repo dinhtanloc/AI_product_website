@@ -1,21 +1,14 @@
-from transformers import pipeline
 import torch
+from diffusers import DiffusionPipeline
 from typing import Optional
 
 class ImageGenerationModel:
-    def __init__(self, model_name: str = "stabilityai/stable-diffusion-2-1"):
-        self.pipe = pipeline(
-            "text-to-image",
-            model=model_name,
-            torch_dtype=torch.float16
+    def __init__(self, model_name: str = "Manojb/stable-diffusion-2-1-base", device: str = "mps"):
+        self.pipe = DiffusionPipeline.from_pretrained(
+            model_name,
+            device_map=device
         )
 
-    def generate(self, prompt: str, negative_prompt: Optional[str] = None, num_inference_steps: int = 25, guidance_scale: float = 7.5, width: int = 512, height: int = 512):
-        return self.pipe(
-            prompt,
-            negative_prompt=negative_prompt,
-            num_inference_steps=num_inference_steps,
-            guidance_scale=guidance_scale,
-            width=width,
-            height=height
-        )
+    def generate(self, prompt: str, **kwargs):
+        result = self.pipe(prompt, **kwargs)
+        return result.images[0] if hasattr(result, "images") else result
